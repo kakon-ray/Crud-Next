@@ -9,8 +9,7 @@ const page = () => {
 
     const [user, setUser] = useState([]);
 
-    let token = localStorage.getItem('auth');
-    var myobj = JSON.parse(token);
+    var myobj = JSON.parse(localStorage.getItem('auth'));
     var mytoken = myobj.token;
 
 
