@@ -4,12 +4,20 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Navbar from '../../compoenet/Navbar';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
 
     const [items, setItems] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { push } = useRouter();
+
+
+    const notify = (msg) => toast(msg);
+
+    
 
     // Function to handle form submission
     const onSubmit = async (data) => {
@@ -26,6 +34,20 @@ const page = () => {
             });
 
             localStorage.setItem('auth', JSON.stringify(postValue.data));
+            if(postValue.data.error){
+                notify(postValue.data.error)
+            }
+            else if(postValue.data.message){
+                notify(postValue.data.message)
+                setTimeout(() => {
+                    push('/admin/profile');
+                  }, "1000");
+                
+            }
+            else{
+                notify('Server Error')
+            }
+
             console.log(postValue.data)
 
         } catch (error) {
@@ -38,6 +60,7 @@ const page = () => {
   
         <main className="flex min-h-screen flex-col">
         <Navbar/>
+        <ToastContainer />
         <div class="w-full max-w-xs mx-auto mt-20">
                     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
 

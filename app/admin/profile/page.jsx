@@ -4,11 +4,16 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../compoenet/Navbar';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const page = () => {
 
     const [user, setUser] = useState([]);
-
+    const { push } = useRouter();
+    
     var myobj = JSON.parse(localStorage.getItem('auth'));
     var mytoken = myobj.token;
 
@@ -27,12 +32,50 @@ const page = () => {
 
     }, []);
 
+
+    const notify = (msg) => toast(msg);
+
+    const logOut = async () => {
+        try {
+            const postValue = await axios({
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    "Authorization": `Bearer ${mytoken}`
+                },
+                url: "http://127.0.0.1:8000/api/logout",
+            });
+
+            localStorage.setItem('auth', JSON.stringify(postValue.data));
+            if(postValue.data.error){
+                notify(postValue.data.error)
+            }
+            else if(postValue.data.message){
+                notify(postValue.data.message)
+                setTimeout(() => {
+                    push('/admin/login');
+                  }, "1000");
+                
+            }
+            else{
+                notify('Login Faild')
+            }
+
+            console.log(postValue.data)
+
+        } catch (error) {
+            console.error('Error submitting form:', error.message);
+        }
+    };
+
     console.log(user)
 
     return (
         <main className="flex min-h-screen flex-col">
         <Navbar/>
-
+        <ToastContainer />
   
 <div class="flex items-center h-screen w-full justify-center">
 
@@ -62,7 +105,7 @@ const page = () => {
             </tbody></table>
 
             <div class="text-center my-3">
-                <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="#">View Profile</a>
+            <button class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" onClick={logOut}>Logout</button>
             </div>
 
         </div>
