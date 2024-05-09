@@ -9,13 +9,13 @@ import { useRouter } from 'next/navigation';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const page = () => {
 
     const [user, setUser] = useState([]);
     const { push } = useRouter();
     
-    var myobj = JSON.parse(localStorage.getItem('auth'));
-    var mytoken = myobj.token;
+    
 
 
     useEffect(() => {
