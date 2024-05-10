@@ -5,11 +5,28 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useFormState } from 'react-dom';
 import loginAction from './LoginAction';
+import { useCookies } from 'next-client-cookies';
+// import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 const page = () => {
 
     const [error,formAction]= useFormState(loginAction,undefined);
+    const cookies = useCookies();
+    const router = useRouter();
+
     
+
+     if(cookies.get('mytoken')){
+        toast("Login Success")
+        setTimeout(()=>{
+            // redirect('/admin/profile');
+            router.push('/admin/profile')
+        }, 1000);
+       
+     }
+
+     
 
 
     return (

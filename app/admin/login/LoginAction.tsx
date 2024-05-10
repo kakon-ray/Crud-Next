@@ -38,7 +38,7 @@ export default async function LoginAction(
             sameSite:"strict",
     
          })
-        redirect('/admin/profile')
+     
         
     }
     
