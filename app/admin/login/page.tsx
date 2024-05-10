@@ -8,6 +8,7 @@ import loginAction from './LoginAction';
 import { useCookies } from 'next-client-cookies';
 // import { redirect } from "next/navigation";
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const page = () => {
 
@@ -15,15 +16,15 @@ const page = () => {
     const cookies = useCookies();
     const router = useRouter();
 
-    
 
-     if(cookies.get('mytoken')){
+
+    if(cookies.get('mytoken') !== undefined){
         toast("Login Success")
         setTimeout(()=>{
             // redirect('/admin/profile');
             router.push('/admin/profile')
         }, 1000);
-       
+    
      }
 
      
