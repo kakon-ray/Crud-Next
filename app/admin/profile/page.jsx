@@ -10,12 +10,15 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useCookies } from 'next-client-cookies';
+
 const page = () => {
 
     const [user, setUser] = useState([]);
     const { push } = useRouter();
-    
-    
+
+    const cookies = useCookies();
+    const mytoken = cookies.get('mytoken')
 
 
     useEffect(() => {
@@ -70,17 +73,18 @@ const page = () => {
         }
     };
 
-    console.log(user)
+
 
     return (
         <main className="flex min-h-screen flex-col">
-        <Navbar/>
+
         <ToastContainer />
   
 <div class="flex items-center h-screen w-full justify-center">
 
 <div class="max-w-xs">
     <div class="bg-white shadow-xl rounded-lg py-3">
+        
         <div class="photo-wrapper p-2">
             <img class="w-32 h-32 rounded-full mx-auto" src={user.image} alt="John Doe"/>
         </div>

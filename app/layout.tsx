@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { cookies } from 'next/headers';
 const inter = Inter({ subsets: ["latin"] });
+import { CookiesProvider } from 'next-client-cookies/server';
+import Navbar from "./compoenet/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +16,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const mytoken = cookies().get("Authorization");
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Navbar mytoken={mytoken?.value}/>
+          <CookiesProvider>{children}</CookiesProvider>
+        </body>
     </html>
   );
 }

@@ -32,8 +32,6 @@ const page = () => {
 
     return (
         <div className="flex min-h-screen z flex-col">
-            <Navbar />
-
             <div class="w-full max-w-xs mx-auto mt-20">
                     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                         <div class="mb-4">

@@ -16,11 +16,11 @@ export function middleware(request) {
     request.nextUrl.pathname === '/admin/signup';
 
     if(logdInUserNotAccessPaths){
-        if(cookie){
+        if(cookie?.value){
            return NextResponse.redirect(new URL("/admin/profile",request.url))
         }
     }else{
-      if(!cookie){
+      if(!cookie?.value){
         return NextResponse.redirect(new URL("/admin/login",request.url))
       }
     }

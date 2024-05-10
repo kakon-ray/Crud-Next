@@ -1,8 +1,25 @@
+"use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useFormState } from 'react-dom';
+import LogoutAction from './LogoutAction';
 
-const Navbar = ({token}) => {
+import { useCookies } from 'next-client-cookies';
 
+const Navbar = ({mytoken}) => {
+
+        const [error,formAction]= useFormState(LogoutAction,undefined);
+        const [token,setToken] = useState('')
+
+        const cookies = useCookies();
+
+        useEffect(()=>{
+                cookies.set('mytoken', mytoken)
+                setToken(cookies.get('mytoken'))
+
+        },[mytoken])
+
+        console.log(mytoken)
 
     return (
         <>
@@ -15,11 +32,17 @@ const Navbar = ({token}) => {
                         <Link class="text-white" href="/admin/signup">Signup</Link>
                 </li>
 
-                {token ? ( <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
+                {!token ? ( <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
                         <Link class="text-white" href="/admin/login">Login</Link>
                 </li>) : <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
-                        <Link class="text-white" href="/admin/login">Logout</Link>
+                       <form action={formAction}>
+                          <input type="text" style={{display:"none"}} />
+                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                Logout
+                            </button>
+                       </form>
                 </li>}
+
                
                 <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
                         <Link class="text-white" href="/admin/profile">Profile</Link>
