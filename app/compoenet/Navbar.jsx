@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import LogoutAction from './LogoutAction';
 
@@ -9,17 +9,15 @@ import { useCookies } from 'next-client-cookies';
 const Navbar = ({mytoken}) => {
 
         const [error,formAction]= useFormState(LogoutAction,undefined);
-        const [token,setToken] = useState('')
 
         const cookies = useCookies();
 
         useEffect(()=>{
                 cookies.set('mytoken', mytoken)
-                setToken(cookies.get('mytoken'))
 
         },[mytoken])
 
-        console.log(mytoken)
+        // console.log(mytoken)
 
     return (
         <>
@@ -32,7 +30,11 @@ const Navbar = ({mytoken}) => {
                         <Link class="text-white" href="/admin/signup">Signup</Link>
                 </li>
 
-                {!token ? ( <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
+                <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
+                        <Link class="text-white" href="/admin/login">Login</Link>
+                </li>
+
+                {/* {!mytoken ? ( <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
                         <Link class="text-white" href="/admin/login">Login</Link>
                 </li>) : <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">
                        <form action={formAction}>
@@ -41,7 +43,7 @@ const Navbar = ({mytoken}) => {
                                 Logout
                             </button>
                        </form>
-                </li>}
+                </li>} */}
 
                
                 <li class="mr-6 hover:bg-teal-500 p-4 hover:p-4">

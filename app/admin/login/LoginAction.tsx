@@ -26,25 +26,19 @@ export default async function LoginAction(
         data: JSON.stringify({email,password}),
     });
 
-    
-     cookies().set("Authorization",postValue.data.token,{
-        secure:true,
-        httpOnly:true,
-        expires:Date.now() * 24 * 60 * 1000 * 3,
-        path:'/',
-        sameSite:"strict",
-
-     })
-
-
     if(postValue.data.error){
         console.log(postValue.data.error)
     }
     else if(postValue.data.message){
-       console.log(postValue.data.message)
-        setTimeout(() => {
-            redirect('/admin/login')
-          }, 1000);
+        cookies().set("Authorization",postValue.data.token,{
+            secure:true,
+            httpOnly:true,
+            expires:Date.now() * 24 * 60 * 1000 * 3,
+            path:'/',
+            sameSite:"strict",
+    
+         })
+        redirect('/admin/profile')
         
     }
     

@@ -10,15 +10,19 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useFormState } from 'react-dom';
+import LogoutAction from '../../compoenet/LogoutAction';
+
 import { useCookies } from 'next-client-cookies';
+import { redirect } from "next/navigation";
 
 const page = () => {
 
     const [user, setUser] = useState([]);
     const { push } = useRouter();
+    const [error,formAction]= useFormState(LogoutAction,undefined);
 
     const cookies = useCookies();
-    const mytoken = cookies.get('mytoken')
 
 
     useEffect(() => {
@@ -26,7 +30,7 @@ const page = () => {
         // const res = await data.json();
         // setninja(res);
         const fetchData = async () => {
-            const result = await axios(`http://127.0.0.1:8000/api/me`, { headers: { "Authorization": `Bearer ${mytoken}` } });
+            const result = await axios(`http://127.0.0.1:8000/api/me`, { headers: { "Authorization": `Bearer ${cookies.get('mytoken')}` } });
 
             setUser(result.data);
         };
@@ -109,7 +113,12 @@ const page = () => {
             </tbody></table>
 
             <div class="text-center my-3">
-            <button class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" onClick={logOut}>Logout</button>
+            <form action={formAction}>
+                          <input type="text" style={{display:"none"}} />
+                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                Logout
+                            </button>
+                       </form>
             </div>
 
         </div>
