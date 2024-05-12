@@ -4,7 +4,8 @@ import "./globals.css";
 import { cookies } from 'next/headers';
 const inter = Inter({ subsets: ["latin"] });
 import { CookiesProvider } from 'next-client-cookies/server';
-import Navbar from "./compoenet/Navbar";
+import Navbar from "./component/Navbar";
+import {ProductProvider} from "../app/context/ProductContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,9 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar mytoken={mytoken?.value}/>
-          <CookiesProvider>{children}</CookiesProvider>
-        </body>
+        <Navbar mytoken={mytoken?.value} />
+        <CookiesProvider>
+          <ProductProvider>
+            {children}
+          </ProductProvider>
+        </CookiesProvider>
+      </body>
     </html>
   );
 }

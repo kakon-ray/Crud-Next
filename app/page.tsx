@@ -1,38 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
 import 'react-toastify/dist/ReactToastify.css';
-
 import { useCookies } from 'next-client-cookies';
 import axios from 'axios';
+import {ProductContext} from "./context/ProductContext";
 
 const page = () => {
 
-  const [product, setProduct] = useState([]);
-
-  const cookies = useCookies();
-
+  let [product, setProduct] = useContext(ProductContext);
+ 
 
 
-  useEffect(() => {
-    // const data = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-    // const res = await data.json();
-    // setninja(res);
-    const fetchData = async () => {
-      const result = await axios(`http://127.0.0.1:8000/api/product`, { headers: { "Authorization": `Bearer ${cookies.get('mytoken')}` } });
-
-      setProduct(result.data.product);
-    };
-
-    fetchData();
-
-  }, []);
-
-
-  console.log(product)
   return (
     <main className="flex min-h-screen flex-col mt-5">
 
