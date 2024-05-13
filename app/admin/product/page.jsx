@@ -17,6 +17,16 @@ const page = () => {
             <ToastContainer />
 
             <h1 className='text-lg text-center py-11'>Manage Product</h1>
+            <div className='d-flex justify-end mb-8 grid grid-cols-1'>
+                <div className='ms-auto'>
+                    <Link href="/admin/product/add"
+                        class="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                        data-ripple-light="true"
+                    >
+                        Add New Product
+                    </Link>
+                </div>
+            </div>
 
             <div class="container mx-auto">
 
@@ -31,13 +41,13 @@ const page = () => {
 
                     <tbody class="bg-grey-light w-full text-center" style={{ "height": "50vh" }}>
                         {
-                            product.map(item => {
+                            product?.map(item => {
                                 return (
                                     <tr key={item.id} class="flex w-full  text-center">
                                         <td class="p-4 w-1/4">Dogs</td>
                                         <td class="p-4 w-1/4">Cats</td>
                                         <td class="p-4 w-1/4">
-                                            <Link href="/admin/product/add"
+                                            <Link href="/admin/product/update"
                                                 class="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                                 data-ripple-light="true"
                                             >

@@ -12,7 +12,7 @@ const page = () => {
 
   let [product, setProduct] = useContext(ProductContext);
  
-
+  console.log(product)
 
   return (
     <main className="flex min-h-screen flex-col mt-5">

@@ -16,7 +16,7 @@ const Navbar = ({mytoken}) => {
 
         },[mytoken])
 
-        // console.log(mytoken)
+   
 
     return (
         <>
