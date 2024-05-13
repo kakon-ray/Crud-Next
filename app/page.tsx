@@ -24,8 +24,8 @@ const page = () => {
               <div key={item.id} className="rounded overflow-hidden shadow-lg">
                 <div className="px-6 py-4">
                   <div className="font-bold text-xl mb-2">
-                    <h2>{item.product_name}</h2>
-                    <h2>{item.product_number}</h2>
+                    <h2>{item.name}</h2>
+                    <h6>{item.number}</h6>
                   </div>
                   <p className="text-gray-700 text-base">
                     {item.desc}

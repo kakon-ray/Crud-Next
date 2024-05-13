@@ -33,8 +33,8 @@ const page = () => {
                 <table class="text-left w-full">
                     <thead class="bg-black flex text-white w-full">
                         <tr class="flex w-full mb-4 text-center">
-                            <th class="p-4 w-1/4">Image</th>
-                            <th class="p-4 w-1/4">Product Name</th>
+                            <th class="p-4 w-1/4">Name</th>
+                            <th class="p-4 w-1/4">Product Number</th>
                             <th class="p-4 w-1/4">Action</th>
                         </tr>
                     </thead>
@@ -44,10 +44,10 @@ const page = () => {
                             product?.map(item => {
                                 return (
                                     <tr key={item.id} class="flex w-full  text-center">
-                                        <td class="p-4 w-1/4">Dogs</td>
-                                        <td class="p-4 w-1/4">Cats</td>
+                                        <td class="p-4 w-1/4">{item.name}</td>
+                                        <td class="p-4 w-1/4">{item.number}</td>
                                         <td class="p-4 w-1/4">
-                                            <Link href="/admin/product/update"
+                                            <Link href={`/admin/product/${item.id}`}
                                                 class="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                                 data-ripple-light="true"
                                             >
