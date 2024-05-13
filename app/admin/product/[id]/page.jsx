@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams,redirect  } from 'next/navigation'
 
 const page = () => {
 
@@ -14,28 +14,24 @@ const page = () => {
   const params = useParams()
   const router = useRouter();
 
-    const [state, setState] = useState({
-        name: "",
-        number: "",
-        desc: ""
-    });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setState((prevProps) => ({
-            ...prevProps,
-            [name]: value
-        }));
-    };
+  const singleProduct = product.filter(
+    (listItem) => listItem?.id == params.id
+  );
+
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+ 
+        // console.log(event.target.name.value);
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/product/edit', {
-                'name':state.name,
-                'number':state.number,
-                'desc':state.desc,
+                'name':event.target.name.value,
+                'number':event.target.name.value,
+                'desc':event.target.desc.value,
                 'id':params.id,
             },{
                 headers: {
@@ -51,9 +47,14 @@ const page = () => {
               console.log(newProduct)
 
             if(response.data.success){
-                setProduct([...newProduct,state])
-                
+                setProduct([...newProduct,{
+                    'name':event.target.name.value,
+                    'number':event.target.name.value,
+                    'desc':event.target.desc.value,
+                    'id':params.id,
+                }])
                 router.push('/admin/product')
+            
             }
           
 
@@ -62,8 +63,12 @@ const page = () => {
             
           }
 
+       
+
      
     };
+
+
 
     return (
         <main className="min-h-screen">
@@ -75,13 +80,13 @@ const page = () => {
                             <h2 class="text-xl font-bold text-center">Update Product</h2>
                         </div>
                         <div>
-                            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Name" name="name" value={state.name} onChange={handleInputChange} />
+                            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Name" name="name" defaultValue={singleProduct[0]?.name} />
                         </div>
                         <div>
-                            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Number" name="number" value={state.number} onChange={handleInputChange} />
+                            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Number" name="number" defaultValue={singleProduct[0]?.number} />
                         </div>
                         <div>
-                            <textarea rows={5} cols={5} class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Descriptin" name="desc" value={state.desc} onChange={handleInputChange} />
+                            <textarea rows={5} cols={5} class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" placeholder="Product Descriptin" name="desc" defaultValue={singleProduct[0]?.desc} />
                         </div>
                         <div>
                             <button class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Submit</button>
