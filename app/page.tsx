@@ -19,7 +19,7 @@ const page = () => {
 
       <div className="grid grid-cols-4">
         {
-          product.map(item => {
+          product?.map(item => {
             return (
               <div key={item.id} className="rounded overflow-hidden shadow-lg">
                 <div className="px-6 py-4">

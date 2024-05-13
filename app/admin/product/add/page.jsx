@@ -43,7 +43,11 @@ const page = () => {
             
 
             if(response.data.success){
-                setProduct([...product,state])
+                if(product){
+                    setProduct([...product,state])
+                }else{
+                    setProduct([state])
+                }
                 router.push('/admin/product')
             }
           
