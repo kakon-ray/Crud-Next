@@ -5,11 +5,50 @@ import { ProductContext } from '@/app/context/ProductContext';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams, redirect } from 'next/navigation'
+import axios from 'axios';
+import { useCookies } from 'next-client-cookies';
 
 
 const page = () => {
 
+    const cookies = useCookies();
     let [product, setProduct] = useContext(ProductContext);
+    const params = useParams()
+   
+
+    const handleDelete = async (id) => {
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/product/delete', {
+                'id':id,
+            },{
+                headers: {
+                    Authorization: 'Bearer' + ' ' + cookies.get('mytoken'),
+                  },
+            });
+            
+
+            const newProduct = product.filter(
+                (listItem) => listItem?.id != id
+              );
+
+              console.log(newProduct)
+
+            if(response.data.success){
+                setProduct([...newProduct])
+            
+            }
+          
+
+          } catch (error) {
+            console.log(error);
+            
+          }
+
+
+
+    };
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -55,12 +94,14 @@ const page = () => {
                                             </Link>
 
                                             <button
+                                                onClick={()=>handleDelete(item.id)}
                                                 class="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                                 data-ripple-light="true"
                                             >
                                                 Delete
                                             </button>
                                         </td>
+                                
                                     </tr>
                                 )
                             })

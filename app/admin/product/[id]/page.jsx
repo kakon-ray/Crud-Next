@@ -30,7 +30,7 @@ const page = () => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/product/edit', {
                 'name':event.target.name.value,
-                'number':event.target.name.value,
+                'number':event.target.number.value,
                 'desc':event.target.desc.value,
                 'id':params.id,
             },{
@@ -49,7 +49,7 @@ const page = () => {
             if(response.data.success){
                 setProduct([...newProduct,{
                     'name':event.target.name.value,
-                    'number':event.target.name.value,
+                    'number':event.target.number.value,
                     'desc':event.target.desc.value,
                     'id':params.id,
                 }])
