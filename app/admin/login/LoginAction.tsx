@@ -14,6 +14,8 @@ export default async function LoginAction(
     const email = formData.get('email');
     const password = formData.get('password');
 
+  
+
 
     const postValue = await axios({
         method: "POST",
@@ -38,6 +40,8 @@ export default async function LoginAction(
             sameSite:"strict",
     
          })
+
+         redirect('/admin/login')
      
         
     }

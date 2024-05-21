@@ -3,6 +3,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { redirect } from "next/navigation";
 
 const page = () => {
 
@@ -22,6 +23,7 @@ const page = () => {
                 data: data,
             });
             console.log(postValue);
+            redirect('/admin/login')
 
         } catch (error) {
             console.error('Error submitting form:', error.message);
