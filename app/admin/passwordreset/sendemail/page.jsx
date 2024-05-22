@@ -13,7 +13,7 @@ const page = () => {
                 'email':event.target.email.value,
             },);
             
-              console.log(response.data)
+              console.log(response.data.msg)
 
           } catch (error) {
             console.log(error);
