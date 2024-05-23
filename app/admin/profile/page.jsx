@@ -29,7 +29,7 @@ const page = () => {
         // const res = await data.json();
         // setninja(res);
         const fetchData = async () => {
-            const result = await axios(`http://127.0.0.1:8000/api/me`, { headers: { "Authorization": `Bearer ${cookies.get('mytoken')}` } });
+            const result = await axios(`http://192.168.5.239:8000/api/me`, { headers: { "Authorization": `Bearer ${cookies.get('mytoken')}` } });
 
             setUser(result.data);
         };

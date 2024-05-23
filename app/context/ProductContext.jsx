@@ -9,7 +9,7 @@ export const ProductProvider = (props) => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/product")
+    fetch("http://192.168.5.239:8000/api/product")
       .then((response) => response.json())
       .then((data) => setProduct(data.product));
   }, []);

@@ -24,7 +24,7 @@ export default async function LoginAction(
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
-        url: "http://127.0.0.1:8000/api/user_login",
+        url: "http://192.168.5.239:8000/api/user_login",
         data: JSON.stringify({email,password}),
     });
 
