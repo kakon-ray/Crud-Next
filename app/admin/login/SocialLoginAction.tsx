@@ -21,14 +21,14 @@ const SocialLoginAction = () => {
         const handleMessage = (event) => {
           // Check the event.origin for security if needed
           console.log("Received data from child window:", event.data.message);
+          console.log(event.data.message?.token)
         };
         window.addEventListener("message", handleMessage);
         // Clean up the event listener on component unmount
         return () => window.removeEventListener("message", handleMessage);
       }, []);
 
-    const token = getToken()
-    console.log(token)
+
 
     return (
         <div>
