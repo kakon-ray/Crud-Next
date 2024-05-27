@@ -23,7 +23,7 @@ const page = () => {
                 data: data,
             });
             console.log(postValue);
-            redirect('/admin/login')
+            // redirect('/admin/login')
 
         } catch (error) {
             console.error('Error submitting form:', error.message);

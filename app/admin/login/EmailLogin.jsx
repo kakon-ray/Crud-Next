@@ -1,11 +1,44 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import loginAction from './LoginAction';
+import { useRouter,useSearchParams  } from 'next/navigation';
+import axios from 'axios';
 
 const EmailLogin = () => {
 
     const [error, formAction] = useFormState(loginAction, undefined);
+    
+    // const searchParams = useSearchParams()
+    // const token = searchParams.get('token')
+    // const email = searchParams.get('email')
+
+
+    // const handleDelete = async () => {
+
+    //     try {
+    //         const response = await axios.post('http://192.168.5.239:8000/api/email-verified', {
+    //             token,
+    //             email
+    //         });
+
+    //         console.log(response);
+
+    //       } catch (error) {
+    //         console.log(error);
+            
+    //       }
+
+
+
+    // };
+
+
+    // useEffect(() => {
+ 
+    //     handleDelete()
+    
+    // }, []);
 
     return (
         <div>
