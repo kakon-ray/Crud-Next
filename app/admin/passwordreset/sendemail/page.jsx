@@ -2,7 +2,12 @@
 import axios from 'axios';
 import React from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const page = () => {
+
+    const notify = (value) => toast(value);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,6 +19,11 @@ const page = () => {
             },);
             
               console.log(response.data.msg)
+              if(response.data.msg){
+                notify(response.data.msg)
+              }else{
+                notify('User Not Found')
+              }
 
           } catch (error) {
             console.log(error);
@@ -26,7 +36,7 @@ const page = () => {
 
     return (
         <div className='flex min-h-screen flex-col mt-5'>
-          
+           <ToastContainer />
             <div className='w-50 mx-auto'>
                 <div className="card">
                 

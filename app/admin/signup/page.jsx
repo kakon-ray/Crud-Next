@@ -4,10 +4,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { redirect } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const page = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const notify = (value) => toast(value);
 
     // Function to handle form submission
     const onSubmit = async (data) => {
@@ -22,7 +26,9 @@ const page = () => {
                 url: "http://192.168.5.239:8000/api/sign_up",
                 data: data,
             });
-            console.log(postValue);
+
+            notify(postValue.data.msg)
+            console.log(postValue.data);
             // redirect('/admin/login')
 
         } catch (error) {
@@ -33,6 +39,7 @@ const page = () => {
 
     return (
         <div className="flex min-h-screen z flex-col">
+             <ToastContainer />
             <div class="w-full max-w-xs mx-auto mt-20">
                     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                         <div class="mb-4">

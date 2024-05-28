@@ -9,37 +9,7 @@ import Link from 'next/link';
 const EmailLogin = () => {
 
     const [error, formAction] = useFormState(loginAction, undefined);
-    
-    // const searchParams = useSearchParams()
-    // const token = searchParams.get('token')
-    // const email = searchParams.get('email')
 
-
-    // const handleDelete = async () => {
-
-    //     try {
-    //         const response = await axios.post('http://192.168.5.239:8000/api/email-verified', {
-    //             token,
-    //             email
-    //         });
-
-    //         console.log(response);
-
-    //       } catch (error) {
-    //         console.log(error);
-            
-    //       }
-
-
-
-    // };
-
-
-    // useEffect(() => {
- 
-    //     handleDelete()
-    
-    // }, []);
 
     return (
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -61,14 +31,14 @@ const EmailLogin = () => {
                 </div>
                 <div className="flex items-center justify-between">
                     <button className="bg-blue-500 hover:bg-blue-700 mx-auto text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Sign up
+                        Login
                     </button>
 
                 </div>
             </form>
 
             <div className='pt-4 text-center'>
-            <Link href='/admin/passwordreset/sendemail'>Reset Your Password</Link>
+            <Link href='/admin/passwordreset/sendemail' className='no-underline hover:underline'> Reset Your Password</Link>
             </div>
 
         </div>

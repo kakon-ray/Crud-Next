@@ -3,11 +3,18 @@ import axios from 'axios';
 import React from 'react';
 import { useRouter,useSearchParams  } from 'next/navigation';
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const page = () => {
 
     const searchParams = useSearchParams()
+    const router = useRouter()
 
     const token = searchParams.get('token')
+
+    const notify = (value) => toast(value);
 
     
     const handleSubmit = async (event) => {
@@ -22,10 +29,14 @@ const page = () => {
                 'token':token
             },);
             
-              console.log(response.data)
+             if(response.data.success){
+                router.push('/admin/login')
+             }else{
+                notify('Alreday Reset Password')
+             }
 
           } catch (error) {
-            console.log(error);
+            notify(error.error)
             
           }
              
@@ -37,7 +48,7 @@ const page = () => {
 
     return (
         <div className='flex min-h-screen flex-col mt-5'>
-          
+            <ToastContainer />
             <div className='w-50 mx-auto'>
                 <div className="card">
                 
