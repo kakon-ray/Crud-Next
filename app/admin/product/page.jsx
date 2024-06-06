@@ -20,7 +20,7 @@ const page = () => {
     const handleDelete = async (id) => {
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000api/product/delete', {
+            const response = await axios.post('http://192.168.5.239:8000/api/product/delete', {
                 'id':id,
             },{
                 headers: {

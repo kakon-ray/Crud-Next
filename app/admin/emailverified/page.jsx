@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Link from 'next/link';
@@ -10,6 +10,8 @@ const EmailVerified = () => {
     const searchParams = useSearchParams()
     const token = searchParams.get('token')
     const email = searchParams.get('email')
+
+    const count = useRef(null);
 
 
     const handleRequest = async () => {
@@ -31,7 +33,12 @@ const EmailVerified = () => {
 
 
     useEffect(() => {
-        handleRequest()
+        if(count.current == null){
+            handleRequest()
+        }
+
+        return () => { count.current = 1; }
+       
     },[]);
 
 
