@@ -22,7 +22,7 @@ const page = () => {
 
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/new-password', {
+            const response = await axios.post('http://127.0.0.1:8000/api/new-password', {
                 'email':event.target.email.value,
                 'password':event.target.password.value,
                 'confirm_password':event.target.confirm_password.value,

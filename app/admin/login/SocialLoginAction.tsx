@@ -6,7 +6,7 @@ import getToken from "./getToken"
 const SocialLoginAction = () => {
 
     const handleSocialLogin = async (provider) => {
-        const url = `http://localhost:8000/api/auth/${provider}`;
+        const url = `http://127.0.0.1:8000/api/auth/${provider}`;
         const response = await axios.get(url);
         // window.location.href = response.data.redirectUrl;
         window.open(

@@ -18,12 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const mytoken = cookies().get("Authorization");
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar mytoken={mytoken?.value} />
+        <Navbar/>
         <CookiesProvider>
           <ProductProvider>
             {children}

@@ -14,7 +14,7 @@ const page = () => {
 
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/reset_password', {
+            const response = await axios.post('http://127.0.0.1:8000/api/reset_password', {
                 'email':event.target.email.value,
             },);
             

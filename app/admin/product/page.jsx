@@ -8,23 +8,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useParams, redirect } from 'next/navigation'
 import axios from 'axios';
 import { useCookies } from 'next-client-cookies';
+import IsAuth from "../../component/isAuth";
 
-
-const page = () => {
+const ManageProduct = () => {
 
     const cookies = useCookies();
     let [product, setProduct] = useContext(ProductContext);
     const params = useParams()
    
+    
 
     const handleDelete = async (id) => {
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/product/delete', {
+            const response = await axios.post('http://127.0.0.1:8000/api/product/delete', {
                 'id':id,
             },{
                 headers: {
-                    Authorization: 'Bearer' + ' ' + cookies.get('mytoken'),
+                    Authorization: 'Bearer' + ' ' + cookies.get('token'),
                   },
             });
             
@@ -117,4 +118,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default IsAuth(ManageProduct);

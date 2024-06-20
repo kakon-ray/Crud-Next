@@ -1,19 +1,53 @@
 "use client"
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import loginAction from './LoginAction';
-import { useRouter,useSearchParams  } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Link from 'next/link';
+import { useCookies } from 'next-client-cookies';
 
 const EmailLogin = () => {
 
-    const [error, formAction] = useFormState(loginAction, undefined);
+    const cookies = useCookies();
+    const router = useRouter();
+
+    // Email Login
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        console.log(email)
+
+        const postValue = await axios({
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            },
+            url: "http://127.0.0.1:8000/api/user_login",
+            data: JSON.stringify({ email, password }),
+        });
+
+        if (postValue.data.error) {
+            console.log(postValue.data.error)
+        }
+        else if (postValue.data.message) {
+
+            console.log( postValue.data.token)
+            cookies.set('token', postValue.data.token)
+            localStorage.setItem("userData",JSON.stringify( postValue.data));
+            router.push("/admin/profile");
+
+        }
+   
+    }
 
 
     return (
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <form action={formAction}>
+            <form onSubmit={handleSubmit}>
 
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -38,7 +72,7 @@ const EmailLogin = () => {
             </form>
 
             <div className='pt-4 text-center'>
-            <Link href='/admin/passwordreset/sendemail' className='no-underline hover:underline'> Reset Your Password</Link>
+                <Link href='/admin/passwordreset/sendemail' className='no-underline hover:underline'> Reset Your Password</Link>
             </div>
 
         </div>

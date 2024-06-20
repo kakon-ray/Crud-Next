@@ -23,7 +23,7 @@ const page = () => {
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
                 },
-                url: "http://192.168.5.239:8000/api/sign_up",
+                url: "http://127.0.0.1:8000/api/sign_up",
                 data: data,
             });
 

@@ -28,14 +28,14 @@ const page = () => {
         // console.log(event.target.name.value);
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/product/edit', {
+            const response = await axios.post('http://127.0.0.1:8000/api/product/edit', {
                 'name':event.target.name.value,
                 'number':event.target.number.value,
                 'desc':event.target.desc.value,
                 'id':params.id,
             },{
                 headers: {
-                    Authorization: 'Bearer' + ' ' + cookies.get('mytoken'),
+                    Authorization: 'Bearer' + ' ' + cookies.get('token'),
                   },
             });
             

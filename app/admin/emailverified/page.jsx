@@ -16,7 +16,7 @@ const EmailVerified = () => {
 
     const handleRequest = async () => {
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/email-verified', {
+            const response = await axios.post('http://127.0.0.1:8000/api/email-verified', {
                 token,
                 email
             });

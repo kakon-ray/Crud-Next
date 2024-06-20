@@ -31,13 +31,13 @@ const page = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://192.168.5.239:8000/api/product/add', {
+            const response = await axios.post('http://127.0.0.1:8000/api/product/add', {
                 'name':state.name,
                 'number':state.number,
                 'desc':state.desc,
             },{
                 headers: {
-                    Authorization: 'Bearer' + ' ' + cookies.get('mytoken'),
+                    Authorization: 'Bearer' + ' ' + cookies.get('token'),
                   },
             });
             
